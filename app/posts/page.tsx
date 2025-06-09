@@ -12,12 +12,7 @@ import type { Metadata } from 'next';
 import { Database } from '@/types/database.types';
 
 // 타입 정의
-type Post = Database['public']['Tables']['posts']['Row'];
 type Category = Database['public']['Tables']['categories']['Row'];
-
-type PostWithCategory = Post & {
-  categories?: Category | null;
-};
 
 // 페이지 메타데이터
 export const metadata: Metadata = {
@@ -35,19 +30,8 @@ type PageProps = {
     page?: string;
     category?: string;
     sort?: 'latest' | 'popular' | 'views';
-    search?: string;
-  }>;
+    search?: string;  }>;
 };
-
-// 날짜 포맷팅 함수
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
 
 // 카테고리 필터 컴포넌트
 function CategoryFilter({ 
@@ -194,9 +178,14 @@ function Pagination({
 }
 
 // 메인 포스트 목록 데이터 조회 함수
-async function PostsList({ searchParams }: { searchParams: any }) {
-  // Supabase 클라이언트 생성
-  const supabase = createServerSupabaseClient();
+async function PostsList({ searchParams }: { 
+  searchParams: {
+    page?: string;
+    category?: string;
+    sort?: 'latest' | 'popular' | 'views';
+    search?: string;
+  }
+}) {
   const page = parseInt(searchParams.page || '1');
   const category = searchParams.category || 'all';
   const sort = (searchParams.sort || 'latest') as 'latest' | 'popular' | 'views';
@@ -207,7 +196,7 @@ async function PostsList({ searchParams }: { searchParams: any }) {
     console.log('페이지:', page, '카테고리:', category, '정렬:', sort);
 
     // 2025년 새로운 Third-Party Auth 방식 Supabase 클라이언트 생성
-    const supabase = await createServerSupabaseClient();    // 게시물 데이터 조회 (좋아요 수 포함)
+    const supabase = await createServerSupabaseClient();// 게시물 데이터 조회 (좋아요 수 포함)
     let postsQuery = supabase
       .from('posts')
       .select(`
@@ -422,8 +411,14 @@ async function PostsList({ searchParams }: { searchParams: any }) {
   }
 }
 
-async function PostsListContent({ searchParams }: { searchParams: any }) {
-  const { posts, pagination, categoriesWithCount } = await PostsList({ searchParams });
+async function PostsListContent({ searchParams }: { 
+  searchParams: {
+    page?: string;
+    category?: string;
+    sort?: 'latest' | 'popular' | 'views';
+    search?: string;
+  }
+}) {  const { posts, pagination, categoriesWithCount } = await PostsList({ searchParams });
 
   const page = parseInt(searchParams.page || '1');
   const category = searchParams.category || 'all';
@@ -518,10 +513,9 @@ async function PostsListContent({ searchParams }: { searchParams: any }) {
           /* 포스트가 없는 경우 */
           <div className="text-center py-16">
             <div className="text-6xl mb-4">📄</div>
-            <h3 className="text-2xl font-bold mb-4">포스트를 찾을 수 없습니다</h3>
-            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+            <h3 className="text-2xl font-bold mb-4">포스트를 찾을 수 없습니다</h3>            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
               {search ? (
-                <>검색어 "{search}"에 해당하는 글이 없습니다.</>
+                <>검색어 &ldquo;{search}&rdquo;에 해당하는 글이 없습니다.</>
               ) : category !== 'all' ? (
                 <>이 카테고리에는 아직 작성된 글이 없습니다.</>
               ) : (

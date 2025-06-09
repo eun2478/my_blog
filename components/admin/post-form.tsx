@@ -473,9 +473,8 @@ export default function PostForm({
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
-              <p className="text-xs text-gray-500">
-                카테고리를 선택하지 않으면 '일반' 카테고리로 분류됩니다
+              </Select>              <p className="text-xs text-gray-500">
+                카테고리를 선택하지 않으면 &lsquo;일반&rsquo; 카테고리로 분류됩니다
               </p>
             </div>
           </CardContent>

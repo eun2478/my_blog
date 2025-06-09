@@ -4,16 +4,15 @@
  * 실제 Supabase 데이터베이스와 연동
  */
 
-import { Suspense } from 'react';
-import { PostCard } from '@/components/blog/post-card';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
 import { Database } from '@/types/database.types';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, User, Eye, ArrowRight } from 'lucide-react';
+import { CalendarDays, Eye, ArrowRight } from 'lucide-react';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 
 export const dynamic = "force-dynamic";
@@ -171,11 +170,12 @@ export default async function Home() {
               {latestPosts.map((post) => (
                 <Card key={post.id} className="group hover:shadow-lg transition-all duration-200">
                   <CardHeader className="p-0">
-                    {post.cover_image_url && (
-                      <div className="aspect-video overflow-hidden rounded-t-lg">
-                        <img
+                    {post.cover_image_url && (                      <div className="aspect-video overflow-hidden rounded-t-lg">
+                        <Image
                           src={post.cover_image_url}
                           alt={post.title}
+                          width={400}
+                          height={225}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                         />
                       </div>

@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { MessageCircle } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs';
 import { Database } from '@/types/database.types';
 import CommentItem from './comment-item';
+import Image from 'next/image';
 
 // 데이터베이스 기반 댓글 타입 정의
 type Comment = Database['public']['Tables']['comments']['Row'];
@@ -30,7 +30,6 @@ const convertCommentFromApi = (apiComment: any): Comment => {
 
 interface CommentSectionProps {
   postId: string;
-  postTitle?: string;
 }
 
 interface CommentFormProps {
@@ -133,14 +132,16 @@ function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
       </CardHeader>
       <CardContent>
         {user && (
-          <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 현재 로그인한 사용자 정보 표시 */}
+          <form onSubmit={handleSubmit} className="space-y-4">          {/* 현재 로그인한 사용자 정보 표시 */}
           <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-            <img
-              src={user?.imageUrl}
-              alt={user?.fullName || '사용자'}
-              className="w-8 h-8 rounded-full"
-            />
+            <div className="relative w-8 h-8 rounded-full overflow-hidden">
+              <Image
+                src={user?.imageUrl || '/default-avatar.png'}
+                alt={user?.fullName || '사용자'}
+                fill
+                className="object-cover"
+              />
+            </div>
             <div>
               <p className="font-medium">{user?.fullName || '익명'}</p>
               <p className="text-sm text-gray-500">{user?.primaryEmailAddress?.emailAddress}</p>
@@ -206,8 +207,6 @@ function CommentList({
   onEditStart, 
   onEditCancel 
 }: CommentListProps) {
-  const { user } = useUser();
-
   // 댓글 삭제 처리
   const handleCommentDelete = async (commentId: string) => {
     if (!confirm('이 댓글을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
@@ -274,14 +273,14 @@ function CommentList({
 /**
  * 메인 댓글 섹션 컴포넌트
  */
-export default function CommentSection({ postId, postTitle }: CommentSectionProps) {
+export default function CommentSection({ postId }: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
 
   // 댓글 로드 (API 호출)
-  const loadComments = async () => {
+  const loadComments = useCallback(async () => {
     try {
       setIsLoading(true);
       setLoadError(null);
@@ -304,11 +303,10 @@ export default function CommentSection({ postId, postTitle }: CommentSectionProp
       setComments(convertedComments);
     } catch (error) {
       console.error('댓글 로드 중 오류:', error);
-      setLoadError(error instanceof Error ? error.message : '댓글을 불러올 수 없습니다.');
-    } finally {
+      setLoadError(error instanceof Error ? error.message : '댓글을 불러올 수 없습니다.');    } finally {
       setIsLoading(false);
     }
-  };
+  }, [postId]);
 
   // 새 댓글 추가 처리
   const handleCommentAdded = (newComment: Comment) => {
@@ -346,13 +344,12 @@ export default function CommentSection({ postId, postTitle }: CommentSectionProp
   const handleEditCancel = () => {
     setEditingCommentId(null);
   };
-
   // 컴포넌트 마운트 시 댓글 로드
   useEffect(() => {
     if (postId) {
       loadComments();
     }
-  }, [postId]);
+  }, [postId, loadComments]);
 
   // 로딩 상태
   if (isLoading) {

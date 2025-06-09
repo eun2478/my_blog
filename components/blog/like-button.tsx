@@ -24,7 +24,7 @@ export default function LikeButton({
   showCount = true,
   className = ''
 }: LikeButtonProps) {
-  const { user, isSignedIn } = useUser();
+  const { isSignedIn } = useUser();
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(initialLikes);
   const [isLoading, setIsLoading] = useState(true);

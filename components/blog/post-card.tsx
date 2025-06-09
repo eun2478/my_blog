@@ -8,9 +8,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { formatDate, getRelativeTime } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { getRelativeTime } from '@/lib/utils';
 import { BlogPost } from '@/types';
 import { useState } from 'react';
 import LikeButton from './like-button';

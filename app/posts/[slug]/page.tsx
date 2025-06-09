@@ -217,14 +217,14 @@ function PostHeader({ post, isAuthor, likeCount }: { post: PostWithCategory; isA
 // 포스트 콘텐츠 컴포넌트
 function PostContent({ post, likeCount }: { post: PostWithCategory; likeCount: number }) {
   return (
-    <article className="mb-16">
-      {/* 커버 이미지 */}
+    <article className="mb-16">      {/* 커버 이미지 */}
       {post.cover_image_url && (
         <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 rounded-xl overflow-hidden">
-          <img
+          <Image
             src={post.cover_image_url}
             alt={post.title}
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
           />
         </div>
       )}
@@ -398,7 +398,6 @@ export default async function PostDetailPage({ params }: PageProps) {
           <div className="mt-16 pt-8 border-t">
             <CommentSection 
               postId={post.id} 
-              postTitle={post.title} 
             />
           </div>
         </div>

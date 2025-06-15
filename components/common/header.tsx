@@ -70,13 +70,12 @@ export default function Header() {
               href="/" 
               className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm"
               aria-label="홈페이지로 이동"
-            >
-              <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
+            >              <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-lg" aria-hidden="true">
-                  B
+                  🥗
                 </span>
               </div>
-              <span className="font-bold text-xl">My Blog</span>
+              <span className="font-bold text-xl">MZ세대의 식습관</span>
             </Link>
           </div>
 

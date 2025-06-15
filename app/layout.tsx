@@ -22,14 +22,14 @@ const notoSansKR = Noto_Sans_KR({
 // SEO 메타데이터 설정
 export const metadata: Metadata = {
   title: {
-    default: "My Blog - 웹 개발 기술 블로그",
-    template: "%s | My Blog",
+    default: "MZ세대의 식습관 - 건강한 라이프스타일 블로그",
+    template: "%s | MZ세대의 식습관",
   },
-  description: "웹 개발, JavaScript, React, Next.js에 관한 기술 블로그입니다. 최신 개발 트렌드와 실무 경험을 공유합니다.",
-  keywords: ["웹 개발", "JavaScript", "React", "Next.js", "TypeScript", "프론트엔드", "기술 블로그"],
-  authors: [{ name: "My Blog Team" }],
-  creator: "My Blog",
-  publisher: "My Blog",
+  description: "MZ세대의 식습관과 건강한 라이프스타일에 대해 공유하는 블로그입니다. 건강에 대해 관심을 기울여 보세요.",
+  keywords: ["MZ세대", "식습관", "건강", "라이프스타일", "영양", "웰니스", "대학생", "건강관리"],
+  authors: [{ name: "김성은" }],
+  creator: "김성은",
+  publisher: "MZ세대의 식습관",
   formatDetection: {
     email: false,
     address: false,
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: "/",
-    title: "My Blog - 웹 개발 기술 블로그",
-    description: "웹 개발, JavaScript, React, Next.js에 관한 기술 블로그입니다.",
-    siteName: "My Blog",
+    title: "MZ세대의 식습관 - 건강한 라이프스타일 블로그",
+    description: "MZ세대의 식습관과 건강한 라이프스타일에 대해 공유하는 블로그입니다.",
+    siteName: "MZ세대의 식습관",
     images: [
       {
         url: "/images/og-image.jpg",

@@ -14,6 +14,17 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CalendarDays, Eye, ArrowRight } from 'lucide-react';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
+import type { Metadata } from 'next';
+
+// 페이지 메타데이터
+export const metadata: Metadata = {
+  title: 'MZ세대의 식습관 - 건강한 라이프스타일',
+  description: 'MZ세대의 식습관에 대해 공유합니다. 건강에 대해 관심을 기울여 보세요. 한신대학교 공공인재학부 김성은의 건강 블로그.',
+  openGraph: {
+    title: 'MZ세대의 식습관 - 건강한 라이프스타일',
+    description: 'MZ세대의 식습관에 대해 공유합니다. 건강에 대해 관심을 기울여 보세요.',
+  },
+};
 
 export const dynamic = "force-dynamic";
 
@@ -121,16 +132,14 @@ export default async function Home() {
   ]);
 
   return (
-    <div id="main-content" className="py-16">
-      {/* Hero 섹션 */}
+    <div id="main-content" className="py-16">      {/* Hero 섹션 */}
       <section className="text-center mb-20">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-blue-600 bg-clip-text text-transparent">
-            Welcome to My Blog
+            MZ세대의 식습관
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            웹 개발, JavaScript, React, Next.js에 관한 최신 기술과 실무 경험을 공유합니다. 
-            함께 성장하는 개발자가 되어보세요.
+            MZ세대의 식습관에 대해 공유합니다. 건강에 대해 관심을 기울여 보세요
           </p>
           
           {/* CTA 버튼들 */}

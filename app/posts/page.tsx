@@ -16,11 +16,11 @@ type Category = Database['public']['Tables']['categories']['Row'];
 
 // 페이지 메타데이터
 export const metadata: Metadata = {
-  title: 'Blog Posts | My Blog',
-  description: '웹 개발, JavaScript, React, Next.js에 관한 모든 블로그 글을 확인해보세요.',
+  title: '블로그 글 | MZ세대의 식습관',
+  description: 'MZ세대의 식습관과 건강한 라이프스타일에 관한 모든 블로그 글을 확인해보세요.',
   openGraph: {
-    title: 'Blog Posts | My Blog',
-    description: '웹 개발, JavaScript, React, Next.js에 관한 모든 블로그 글을 확인해보세요.',
+    title: '블로그 글 | MZ세대의 식습관',
+    description: 'MZ세대의 식습관과 건강한 라이프스타일에 관한 모든 블로그 글을 확인해보세요.',
   },
 };
 

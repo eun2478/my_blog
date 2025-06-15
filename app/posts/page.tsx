@@ -560,15 +560,13 @@ export default async function PostsPage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
 
   return (
-    <div className="py-16">
-      {/* 페이지 헤더 */}
+    <div className="py-16">      {/* 페이지 헤더 */}
       <section className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Blog Posts
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          웹 개발, JavaScript, React, Next.js에 관한 모든 블로그 글을 확인해보세요. 
-          카테고리별로 필터링하거나 관심 있는 주제를 검색해보세요.
+          MZ세대의 식습관에 대해 공유합니다. 건강에 대해 관심을 기울여 보세요.
         </p>
       </section>
 
